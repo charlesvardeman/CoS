@@ -1,0 +1,28 @@
+diff --git a/skills/chief-of-staff/SKILL.md b/skills/chief-of-staff/SKILL.md
+--- a/skills/chief-of-staff/SKILL.md
++++ b/skills/chief-of-staff/SKILL.md
+@@ -35,4 +35,5 @@ Prefer a short prioritized brief over an exhaustive digest. Do not present novel
+ ## Conditional References
+ 
+ - For inbox triage and periodic attention reviews, read [references/operating-policy.md](references/operating-policy.md).
++- When an operational output depends on project participation, role, authority, or immediate responsibility, read [references/project-participant-reconciliation.md](references/project-participant-reconciliation.md).
+ - Before returning a structured brief, draft, action request, or no-change result, read [references/output-contracts.md](references/output-contracts.md).
+diff --git a/skills/chief-of-staff/references/project-participant-reconciliation.md b/skills/chief-of-staff/references/project-participant-reconciliation.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/skills/chief-of-staff/references/project-participant-reconciliation.md
+@@ -0,0 +1,13 @@
++# Project Participant Reconciliation
++
++Use this procedure when an operational output depends on who is involved in a project, what role or authority they hold, or who owns the immediate action.
++
++1. Retrieve the project note and its typed person relationships from the vault.
++2. Retrieve only the relevant live participation evidence, such as message headers, calendar attendees, or task ownership.
++3. Distinguish current event participation, durable project involvement, role or authority, and immediate responsibility.
++4. Classify material discrepancies as missing-participant, missing-role, possibly-stale, conflicting, or ambiguous.
++5. Use live sources for current event membership and the vault for curated durable context. Do not infer durable role or authority from attendance, authorship, a carbon copy, or one task assignment.
++6. If uncertainty changes the output, verify it or use neutral language.
++7. When a material semantic gap appears, emit a bounded capture proposal with the project, person, claimed relationship or role, evidence locator, observation time, confidence, and proposed change. Do not write semantic memory without explicit approval.
++
++During a heartbeat, surface the gap only when it affects an imminent meeting, message, commitment, delegation, or decision. Do not turn periodic review into a generic roster-completeness audit.

@@ -42,3 +42,23 @@ This correction changes the design contract; no deployed storage, task capture, 
 - Added the Codex installation wrapper while retaining the portable Agent Plugins manifest.
 
 These are explicit design policies. No user source was scanned, no task or heartbeat was created, and no operational trajectory was captured by this repository change.
+
+## 2026-09-02 — Project participant and role reconciliation
+
+- Reviewed the first normalized operational episode and linked correction outcomes after project-participant assumptions produced incorrect draft framing.
+- Recorded confirmed pattern `COS-P011`: retrieve durable project relationships from the vault, compare them with live participation evidence, and distinguish event membership from durable role, authority, and immediate responsibility.
+- Kept specific people, project membership, messages, and role assertions out of the evolution wiki; those remain semantic-vault or live-source objects.
+- Defined use-on-contact closure through bounded semantic-capture proposals and explicit approval, rather than a mass roster audit or automatic vault write.
+- Created proposed skill change `COS-SP001` with a separate candidate patch and an independent-episode evaluation plan.
+
+No operational skill or vault ontology was changed. Skill adoption and the vault representation for role-bearing participation remain separate user-governed decisions.
+
+## 2026-09-02 — COS-SP001 adopted in 0.2.1
+
+- Recorded Chuck's explicit approval to adopt `COS-SP001`.
+- Added the project-participant reconciliation procedure as a conditional operational reference.
+- Preserved the distinction between live participation, durable involvement, role or authority, and immediate responsibility.
+- Preserved the read-mostly boundary: material role gaps produce semantic-capture proposals and never automatic vault writes.
+- Versioned the plugin as `0.2.1`; later independent episodes will provide exploratory forward-evaluation evidence.
+
+No vault ontology or project roster was changed by this skill adoption.

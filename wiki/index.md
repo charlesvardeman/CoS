@@ -76,6 +76,16 @@ Do not delay real use until a full harness exporter or software-style evaluation
 
 The separate wiki-memory adapter generalizes how the Chief of Staff should retrieve, verify, prioritize, route, communicate, and seek authorization. Specific people, projects, messages, literature, and current facts remain in the vault or their source systems. The operational task cannot consult the evolution wiki directly.
 
+### COS-P011 — Reconcile project participation and role at the point of use
+
+**Status:** confirmed declared policy
+**Origin:** first operational episode and explicit generalization instruction, 2026-09-02
+**Record:** [Project participant and role reconciliation](patterns/COS-P011-project-participant-role-reconciliation.md)
+
+When an operational output depends on who is involved or what authority they hold, retrieve durable project context from the vault, compare it with relevant live participation evidence, distinguish event membership from durable role, and route material gaps through reviewed semantic capture. Do not infer authority from mere attendance or turn heartbeats into generic roster audits.
+
+The procedure was adopted in operational skill `0.2.1` through accepted proposal [COS-SP001](proposals/COS-SP001-project-participant-role-reconciliation.md).
+
 ## Open Questions
 
 - What minimum evidence changes an induced lesson from provisional to confirmed?
@@ -89,3 +99,5 @@ The separate wiki-memory adapter generalizes how the Chief of Staff should retri
 
 - [Evolution log](evolution-log.md)
 - [Skill impact](skill-impact.md)
+- [COS-P011 pattern record](patterns/COS-P011-project-participant-role-reconciliation.md)
+- [COS-SP001 skill proposal](proposals/COS-SP001-project-participant-role-reconciliation.md)

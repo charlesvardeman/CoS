@@ -1,6 +1,6 @@
 {
   "name": "chief-of-staff",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A durable, heartbeat-driven Chief of Staff with governed procedural learning.",
   "author": {
     "name": "Charles F. Vardeman II"

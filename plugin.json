@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "chief-of-staff",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Read-mostly personal chief-of-staff workflows with governed, evidence-based skill evolution.",
   "author": {
     "name": "Charles F. Vardeman II"

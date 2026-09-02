@@ -35,6 +35,7 @@ Prefer a short prioritized brief over an exhaustive digest. Do not present novel
 ## Conditional References
 
 - For inbox triage and periodic attention reviews, read [references/operating-policy.md](references/operating-policy.md).
+- When an operational output depends on project participation, role, authority, or immediate responsibility, read [references/project-participant-reconciliation.md](references/project-participant-reconciliation.md).
 - Before returning a structured brief, draft, action request, or no-change result, read [references/output-contracts.md](references/output-contracts.md).
 - When invoked by a scheduler or asked to design recurring behavior, read [references/recurring-checks.md](references/recurring-checks.md). This reference does not itself authorize creating an automation.
 - When trajectory capture is configured, read [references/trajectory-capture.md](references/trajectory-capture.md) before recording the episode.
