@@ -14,17 +14,19 @@ The paper assumes benchmark-controlled tasks with homogeneous rollouts and immed
 - the harness compacts and summarizes conversations;
 - authorization and privacy are part of correctness.
 
-The adaptation preserves the paper's separation of raw experience, persistent learning, and executable skills while changing the episode model, trace ingestion, outcome labeling, privacy controls, and validation gate.
+The adaptation preserves the paper's separation of raw experience, persistent learning, and executable skills while changing the episode model, trace ingestion, outcome labeling, privacy controls, and adoption gate. The minimum viable system learns between real episodes; it does not wait for a software-style test harness or modify itself inside an active run.
 
 ## Adapted Layers
 
 ### Raw layer
 
-The raw layer stores append-only, temporally ordered evidence of individual CoS runs. It is not Codex memory and is not a copy of the entire surrounding conversation.
+The raw layer is the evidence substrate shared by heterogeneous source containers. For continual learning, a configured CoS trajectory container stores append-only, temporally ordered evidence of individual CoS runs. It is not Codex memory and is not a copy of the entire surrounding conversation.
 
 The canonical episode is one coherent CoS operation, such as a morning review, inbox triage, meeting preparation, project scan, or specialist-task follow-up. A long-lived Codex task may contain many episodes.
 
-Raw traces remain machine-local by default and are excluded from Git. They should capture the minimum evidence needed to reconstruct observable behavior, with sensitive source content represented by stable identifiers, hashes, redacted excerpts, or protected snapshot references whenever possible.
+The trajectory container should capture the minimum evidence needed to reconstruct observable behavior, with sensitive source content represented by stable identifiers, hashes, redacted excerpts, or protected snapshot references whenever possible. Its physical location, Git treatment, backup, indexing, retention, and disclosure posture come from its `raw-container-policy/v1` binding. The likely first personal policy is machine-local and Git-ignored, but that is not inherited by other raw containers such as Readwise or papers.
+
+The first usable capture profile is an agent-authored episode receipt. At the end of an operational invocation, the Chief-of-Staff task appends the ordered observations, actions, material results, approval events, and output classifications available in its current context. The receipt declares its capture method and limitations. It is less complete than a native harness trace but sufficient to begin evidence-grounded learning when the Maintainer can reconstruct the relevant behavior from it.
 
 ### Wiki layer
 
@@ -38,11 +40,25 @@ The skills layer contains concise operational instructions selected from the lar
 
 The inference agent receives the accepted skill but not the evolution wiki. The Maintainer and Proposer receive controlled access to traces and the wiki during a separate evolution workflow.
 
-## Codex Trace Adapter
+## Minimum Capture and Codex Trace Adapter
 
 Codex memory is a delayed, selective consolidation layer. It may omit sessions and external-context work, and it lacks the ordered observations and actions needed for causal analysis. It can suggest a candidate pattern but cannot serve as WikiSkill's raw layer.
 
-The preferred trace path is:
+The installation-ready trace path is:
+
+```text
+Operational CoS episode
+        │
+        ▼
+Task-authored observable receipt
+        │
+        ▼
+cos-run/v1 in the configured trajectory container
+```
+
+This path avoids making a native exporter a prerequisite for using the Chief of Staff. It must not be described as a complete transcript, and capture failure must remain visible.
+
+The later higher-fidelity path is:
 
 ```text
 Codex structured task history and item events
@@ -57,9 +73,25 @@ Codex Trace Adapter
 cos-run/v1 normalized episode
 ```
 
-The [Codex App Server](https://learn.chatgpt.com/docs/app-server) is the preferred structured interface for task history and events. [Codex hooks](https://learn.chatgpt.com/docs/hooks) should only enqueue identifiers or notify an asynchronous normalizer; they should not perform heavy trace analysis. Native transcript or rollout files may be supported by a named parser version, but the adapter must contain the instability because their format is not a public portable interface.
+The [Codex App Server](https://learn.chatgpt.com/docs/app-server) is the preferred future structured interface for task history and events. [Codex hooks](https://learn.chatgpt.com/docs/hooks) should only enqueue identifiers or notify an asynchronous normalizer; they should not perform heavy trace analysis. Native transcript or rollout files may be supported by a named parser version, but the adapter must contain the instability because their format is not a public portable interface.
 
 Context compaction is recorded as a boundary in the event sequence. A generated compaction summary is not treated as a new episode or as equivalent to the original trace.
+
+## Identifying Chief-of-Staff Tasks and Episodes
+
+A Codex task is a conversation envelope, not necessarily one CoS run. A dedicated Chief-of-Staff task may contain many CoS episodes, while a mixed-purpose task may contain one bounded CoS episode among unrelated work. The trace adapter therefore needs both task-level classification and episode-level boundaries.
+
+Once classified, normalized episodes in the trajectory container become the raw evidence for understanding how Chief-of-Staff tasks actually operate and for later procedural learning. Raw history supports that analysis, but the mere presence of task events in raw storage does not by itself establish that they are CoS episodes.
+
+Prefer explicit, durable signals over title matching or content inference:
+
+1. an explicit Chief-of-Staff skill invocation or router event;
+2. a configured scheduler or automation binding;
+3. an explicit task binding in the CoS deployment configuration;
+4. a normalized marker emitted when a CoS episode begins;
+5. a conservative heuristic only as a fallback, recorded with its confidence and reasons.
+
+Do not classify every task that mentions email, projects, or meetings as a Chief-of-Staff task. Until the harness exposes a dependable invocation marker, identification remains an adapter decision to test rather than a convention hidden in the skill.
 
 ## Normalized Run Record
 
@@ -70,6 +102,10 @@ schema: cos-run/v1
 run_id: stable local identifier
 thread_id: harness task identifier
 turn_id: harness turn identifier
+task_classification: dedicated-cos | mixed | other | unknown
+identification:
+  method: skill-invocation | scheduler-binding | configured-task | episode-marker | heuristic
+  confidence: high | medium | low
 started_at: timestamp
 invocation: interactive | heartbeat
 mode: inbox-triage | daily-review | meeting-prep | project-scan | other
@@ -87,6 +123,9 @@ drafts: []
 authorization_events: []
 result: completed | partial | failed | no-change
 native_provenance: []
+capture:
+  method: task-authored-receipt | codex-structured-history | native-rollout-adapter
+  limitations: []
 privacy: {}
 ```
 
@@ -94,13 +133,35 @@ Each source observation should preserve identity, retrieval time, freshness, and
 
 Hidden reasoning is not required. Explicit, user-visible rationale tags such as `deadline-within-48h`, `unanswered-request`, or `source-conflict` are more auditable and portable.
 
+## Wiki Memory Adapter
+
+The wiki-memory adapter is a governed procedure, not a memory store embedded in the operational task:
+
+```text
+selected trajectories + outcomes
+        │
+        ▼
+Wiki Maintainer
+        │
+        ├── instance facts remain in vault or source
+        └── procedural generalities enter evolution wiki
+        │
+        ▼
+optional narrow skill proposal
+        │
+        ▼
+human adoption decision
+```
+
+The adapter learns how the Chief of Staff should retrieve, prioritize, verify, route, and communicate. It does not learn a shadow database of current people, projects, messages, papers, or deadlines. Operational runs never read the evolution wiki; only an accepted skill revision changes their behavior.
+
 ## Delayed Outcomes
 
 A CoS response may only become evaluable hours or days later. Raw run records therefore remain immutable while outcome observations are appended separately:
 
 ```text
-raw/runs/<run-id>.json
-outcomes/<run-id>.jsonl
+<trajectory-container>/runs/<run-id>.json
+<outcome-container>/<run-id>.jsonl
 ```
 
 Possible outcomes include:
@@ -149,7 +210,7 @@ Neither role may move specific personal facts into procedural memory. Neither ro
 
 ## Evaluation and Adoption
 
-A candidate skill must be evaluated against frozen, redacted, or synthetic fixtures. It must not be tested by replaying mutating actions against live systems.
+A candidate skill must be assessed against evidence independent of the examples that induced the proposed change. During early use, that evidence can be subsequent real episodes reviewed by the user. Frozen, redacted, or synthetic fixtures should be retained when representative cases emerge and repeatable comparison becomes useful. Mutating behavior must never be replayed against live systems merely for evaluation.
 
 Evaluation should cover more than task completion:
 
@@ -163,7 +224,7 @@ Evaluation should cover more than task completion:
 - behavior across compaction and partial-source failures;
 - portability across supported harnesses where applicable.
 
-Adopt a proposal only when it improves the targeted behavior without material regression on retained fixtures. Record acceptance, rejection, or rollback in the evolution log and update the skill-impact record.
+Adopt a proposal only when the available evidence and human review justify the targeted change without an apparent material regression. Label early decisions exploratory when no representative comparison set exists. Record acceptance, rejection, or rollback in the evolution log and update the skill-impact record.
 
 Initially, all proposals require human review. Automatic proposal generation does not imply automatic adoption.
 
@@ -186,7 +247,8 @@ Memory must never bypass evidence review and write directly to the wiki or skill
 
 - Autonomous online self-modification
 - Capturing hidden chain-of-thought
-- Committing raw personal traces to the plugin repository
+- Treating one Git or storage policy as intrinsic to every raw container
+- Committing raw personal traces to the portable plugin repository
 - Replacing the vault with learned summaries
 - Treating user engagement as the sole measure of quality
 - Automatic semantic capture

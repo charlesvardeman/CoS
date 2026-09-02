@@ -1,0 +1,28 @@
+{
+  "name": "chief-of-staff",
+  "version": "0.2.0",
+  "description": "A durable, heartbeat-driven Chief of Staff with governed procedural learning.",
+  "author": {
+    "name": "Charles F. Vardeman II"
+  },
+  "homepage": "https://github.com/charlesvardeman/CoS",
+  "repository": "https://github.com/charlesvardeman/CoS",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Chief of Staff",
+    "shortDescription": "Proactive work awareness with governed learning",
+    "longDescription": "Run a durable Chief-of-Staff task that checks approved sources on a heartbeat, prepares decision-ready briefs and drafts, and learns procedural generalities through a separate evidence-governed wiki workflow.",
+    "developerName": "Charles F. Vardeman II",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Configure this as my durable Chief of Staff task.",
+      "Review what needs my attention and prepare drafts.",
+      "Evolve the Chief of Staff from its recorded episodes."
+    ]
+  }
+}

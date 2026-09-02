@@ -7,7 +7,7 @@ description: Review current personal work context, identify items needing attent
 
 Maintain a bounded, decision-ready view of the user's work. Retrieve the specific context needed for the current review, identify meaningful changes or commitments, and present the smallest useful set of attention items, drafts, or approval requests.
 
-This is a design-stage operational contract. Use only capabilities available and authorized in the current harness; do not imply that an unavailable connector, scheduler, or memory writer exists.
+Operate naturally as continuing work support in one durable task. Use only capabilities available and authorized in the current harness; do not imply that an unavailable connector, scheduler, or memory writer exists.
 
 ## Memory and Source Boundary
 
@@ -28,6 +28,7 @@ When mutable claims conflict, compare provenance and timestamps and expose the c
 5. For each selected item, state what changed, why it matters now, its source and freshness, and the smallest useful next step.
 6. Separate informational briefs, editable drafts, and restricted action requests.
 7. If nothing materially changed, remain quiet except for any required local checkpoint.
+8. When trajectory capture is configured, append a privacy-minimized episode receipt after completing the operational result.
 
 Prefer a short prioritized brief over an exhaustive digest. Do not present novelty alone as importance.
 
@@ -36,6 +37,7 @@ Prefer a short prioritized brief over an exhaustive digest. Do not present novel
 - For inbox triage and periodic attention reviews, read [references/operating-policy.md](references/operating-policy.md).
 - Before returning a structured brief, draft, action request, or no-change result, read [references/output-contracts.md](references/output-contracts.md).
 - When invoked by a scheduler or asked to design recurring behavior, read [references/recurring-checks.md](references/recurring-checks.md). This reference does not itself authorize creating an automation.
+- When trajectory capture is configured, read [references/trajectory-capture.md](references/trajectory-capture.md) before recording the episode.
 
 ## Specialist Coordination
 
@@ -59,4 +61,4 @@ Do not automatically convert operational observations into vault notes. When dur
 
 ## Learning Boundary
 
-Do not update this skill from the current run. Harness-specific trace capture and subsequent skill evolution occur outside the operational workflow. User corrections apply immediately to the current interaction but become standing procedure only through explicit instruction or the governed evolution process.
+Do not update this skill or read the evolution wiki during the current run. Recording an observable episode is operational bookkeeping, not learning. The separate evolution workflow decides whether evidence supports a procedural generalization or skill proposal. User corrections apply immediately to the current interaction but become standing procedure only through explicit instruction or that governed evolution process.

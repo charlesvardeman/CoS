@@ -15,8 +15,10 @@ The architecture separates portable procedure, personal knowledge, live source s
 | Personal vault | People, projects, literature, decisions, commitments, and curated context | Specific semantic knowledge |
 | Connected systems | Current email, calendar, task, reference, and reading state | Current source state within approved scopes |
 | Specialist tasks | Perform bounded work such as literature import or Readwise processing | Their explicitly delegated task |
-| Scheduler or heartbeat | Decide when to invoke a CoS run | Host-specific recurrence only |
-| Codex trace adapter | Convert harness events into normalized CoS runs | Observation and provenance, not interpretation |
+| Scheduler or heartbeat | Invoke the durable CoS task on its configured cadence | Host-specific recurrence only |
+| Episode recorder | Append privacy-minimized `cos-run/v1` receipts after operational episodes | Observation and provenance, not interpretation |
+| Optional Codex trace adapter | Enrich receipts from structured harness events | Capture fidelity, not interpretation |
+| Configured raw containers | Retain source evidence under per-container storage, search, and disclosure policy | Evidence, not asserted semantic knowledge |
 | CoS evolution wiki | Accumulate generalized procedural lessons | Evidence-linked learning record |
 | `evolve-chief-of-staff` skill | Maintain the wiki and propose evaluated changes | Development workflow, not runtime authority |
 | User | Set policy, authorize restricted actions, and accept consequential behavior changes | Final authority |
@@ -109,6 +111,9 @@ Produce bounded attention items
         ├── brief or draft
         ├── action request requiring approval
         └── quiet checkpoint when nothing changed
+        │
+        ▼
+Append a normalized episode receipt when capture is configured
 ```
 
 An attention item should answer:
@@ -132,6 +137,14 @@ The skill uses different authorities for different questions:
 
 When authorities conflict, the skill should expose the conflict and its timestamps rather than silently merge incompatible claims.
 
+## Raw Evidence Boundary
+
+Raw containers preserve source evidence before promotion. `raw` is an authority and lifecycle classification, not a promise that every item is local, ignored by Git, unsearchable, or confidential. A Readwise Markdown mirror, a manifest for externally stored papers, and an ignored CoS trajectory stream may all be raw while using different container policies.
+
+Each deployment declares a container's origin, physical binding, versioning, update semantics, discovery, retention, privacy, disclosure, and promotion behavior. A retrieval-capable agent may be able to find content whose disclosure posture says not to introduce it outside a relevant context. That is an answer-scope rule; stronger confidentiality requires an enforced access boundary.
+
+See [storage-model.md](storage-model.md) for the container policy contract.
+
 ## Mutation Boundary
 
 The initial capability envelope is read-only retrieval and draft generation. The following require explicit approval at the time they are performed:
@@ -140,7 +153,7 @@ The initial capability envelope is read-only retrieval and draft generation. The
 - creating, editing, or canceling calendar events;
 - changing external tasks, shared documents, or automations;
 - writing or promoting semantic memory;
-- installing or activating recurring monitoring;
+- installing or activating recurring monitoring, or materially expanding an existing monitor's scope;
 - adopting an evolved skill version for operational use.
 
 An unattended run emits a stable action request instead of waiting on an interactive approval or assuming permission.
@@ -149,7 +162,7 @@ An unattended run emits a stable action request instead of waiting on an interac
 
 The operational skill receives the current accepted instructions and the information needed for its present task. It must not inspect the evolution wiki or modify itself during ordinary execution.
 
-The evolution workflow receives normalized traces, outcome annotations, the evolution wiki, the current skill, and evaluation fixtures. It can update the wiki and propose a narrow skill patch, but adoption remains gated.
+The evolution workflow receives normalized traces, outcome annotations, the evolution wiki, the current skill, and any available comparison evidence. It can update the wiki and propose a narrow skill patch, but adoption remains gated. Early evolution passes may be exploratory and human-reviewed; retained fixtures are added when real failures or stable cases justify them.
 
 This separation prevents exploratory lessons, rejected ideas, and detailed optimization history from leaking into everyday reasoning.
 
@@ -157,10 +170,10 @@ This separation prevents exploratory lessons, rejected ideas, and detailed optim
 
 The portable package contains Agent Skills and future portable MCP declarations. Harness-specific behavior belongs behind adapters or reverse-domain client extensions.
 
-For ChatGPT Codex, likely integration points include structured task history through the App Server and lightweight lifecycle hooks. Direct parsing of native rollout files may be useful during prototyping but must remain behind a versioned adapter because it is not a stable portable contract.
+For ChatGPT Codex, the minimum profile lets the operational task write a normalized receipt from its observable episode context. Structured task history through the App Server and lightweight lifecycle hooks can later enrich or verify those receipts. Direct parsing of native rollout files must remain behind a versioned adapter because it is not a stable portable contract.
 
-The scheduler is also external to the skill. Codex heartbeat automations, another client's scheduler, and an interactive request should all invoke the same operational contract.
+The scheduler implementation is external to the portable procedure, but recurring operation is part of the product contract. A configured Codex deployment creates one thread heartbeat using the native automation surface. Another client's scheduler and an interactive request invoke the same operational contract.
 
-The portable package does not bundle a scheduler skill. A Codex installation may compose the existing `loop` skill through its installation profile. Other harnesses may supply a different scheduler without changing Chief-of-Staff behavior.
+The portable package does not reimplement a scheduler. A Codex installation follows the same minimal thread-heartbeat behavior as the existing `loop` skill through the native automation surface. Other harnesses may supply a different scheduler without changing Chief-of-Staff behavior.
 
 See [storage-model.md](storage-model.md) for the source-versus-instance boundary used by each artifact.

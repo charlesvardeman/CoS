@@ -15,11 +15,13 @@ Work only from the materials available for the requested evolution pass:
 - the existing CoS evolution wiki;
 - the current operational skill version;
 - prior proposal and evaluation history;
-- retained validation fixtures appropriate to the proposed change.
+- retained validation fixtures or independent comparison episodes when available.
 
 Do not treat Codex memory summaries as raw traces. Do not infer missing source content or reconstruct hidden reasoning.
 
 Read [references/evolution-records.md](references/evolution-records.md) when creating or changing wiki entries, skill proposals, or evaluation records.
+
+Read [references/wiki-memory-adapter.md](references/wiki-memory-adapter.md) before consolidating operational evidence into the evolution wiki.
 
 ## Maintain the Wiki
 
@@ -48,7 +50,7 @@ Do not update the deployed operational skill merely because a proposal was gener
 
 ## Evaluate and Gate
 
-Evaluate the candidate on retained, protected fixtures that were not used solely to formulate it. Include applicable checks for usefulness, missed items, false escalation, concision, freshness, provenance, quiet behavior, source failure, compaction, and approval safety.
+Evaluate the candidate against independent evidence when available. Early passes may use human review and subsequent real episodes; label them exploratory rather than pretending they prove general improvement. Convert representative successes, failures, and boundary cases into protected fixtures only when doing so materially improves future comparison.
 
 Never test mutating behavior against live systems. Use frozen, redacted, or synthetic sources.
 

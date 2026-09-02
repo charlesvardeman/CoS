@@ -31,7 +31,7 @@ patterns: []
 change_summary: one coherent behavioral change
 expected_effect: observable improvement
 regression_risks: []
-fixture_set: immutable identifier
+comparison_evidence: immutable fixture set or independent episode identifiers
 status: proposed | accepted | rejected | rolled-back
 human_decision: null or decision reference
 ```
@@ -40,9 +40,9 @@ Keep the proposed patch separately so it can be inspected and reverted.
 
 ## Evaluation Record
 
-An evaluation identifies the candidate and baseline skill versions, fixture-set version, harness and model, observable measures, failures, safety results, and decision. Preserve qualitative examples through protected fixture identifiers rather than personal source excerpts.
+An evaluation identifies the candidate and baseline skill versions, comparison evidence, harness and model, observable measures, failures, safety results, and decision. Preserve qualitative examples through protected identifiers rather than personal source excerpts.
 
-Evaluation evidence must distinguish the runs used to induce a lesson from retained runs used to test the proposed change. When a representative validation split is not yet available, label the result exploratory rather than treating it as proof of improvement.
+Evaluation evidence must distinguish the runs used to induce a lesson from independent runs used to assess the proposed change. When a representative validation split is not yet available, label the result exploratory rather than treating it as proof of improvement. Real-use evaluation is valid evidence; fixtures are a later reusable comparison mechanism, not a prerequisite for learning.
 
 ## Wiki Persistence
 

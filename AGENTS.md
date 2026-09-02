@@ -27,7 +27,8 @@ Before changing behavior, read:
 - Default to read-only retrieval and draft generation.
 - Sending messages, changing calendars, modifying shared documents, changing external automations, and writing semantic memory require explicit user authorization at the time of action.
 - Operational runs must not read or edit the evolution wiki. Evolution is a separate workflow.
-- Raw traces may contain private information. Keep them machine-local, minimize captured content, and never commit them.
+- Raw artifacts are evidence, not asserted semantic knowledge. Their physical location, Git treatment, indexing, retention, and disclosure posture are declared per container; a `raw/` path does not itself provide confidentiality.
+- CoS trajectory containers may contain private information. Minimize captured content and follow the configured container policy. Never commit traces to this portable plugin repository.
 - Do not install or activate a recurring monitor merely because plugin or skill code exists.
 
 ## Development Practice

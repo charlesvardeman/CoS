@@ -7,6 +7,9 @@ The package defines this contract but does not store the user's configured insta
 ```yaml
 schema: cos-config/v1
 profile_id: user-selected stable identifier
+task:
+  thread_id: host-provided durable task identifier
+  classification: dedicated-cos
 review_modes:
   inbox-triage:
     enabled: true
@@ -38,17 +41,27 @@ authorization:
   approval_required: []
 storage:
   operational_state: external protected location
-  raw_traces: external protected location
-  outcomes: external protected location
+  trajectory_container: raw container binding or unavailable
+  outcome_container: raw container binding or unavailable
+  raw_containers: []
   evolution_wiki: governed location
+trajectory_capture:
+  enabled: true
+  recorder: task-authored-receipt | host-adapter
+  content_posture: privacy-minimized
 scheduler:
-  desired: false
-  cadence: null
+  desired: true
+  kind: thread-heartbeat
+  cadence: user-selected value; recommend 30 minutes for initial Codex setup
   active_host: null
   automation_id: null
 ```
 
 This is a semantic shape, not a mandate to use YAML. A host-native configuration system is acceptable if it preserves the distinctions.
+
+Each entry in `raw_containers` follows [raw-container-policy.md](raw-container-policy.md). It declares evidence authority separately from physical location, Git treatment, backup, update semantics, discovery, retention, privacy, disclosure, and promotion. Do not assume that all raw containers are external, ignored, or unsearchable.
+
+The trajectory and outcome fields bind CoS continual learning to configured containers; they do not authorize broad task-history capture. Setup must explicitly authorize the bounded operational task to append its own privacy-minimized episode receipts. A host adapter requires separate scope and policy.
 
 ## Source Entries
 
@@ -84,6 +97,6 @@ The initial mutation policy is:
 
 ## Persistence
 
-Before writing configuration, identify the proposed destination and whether it is machine-local, shared, or versioned. Never store credentials, tokens, raw source exports, or native task history in the portable package.
+Before writing configuration, identify the proposed destination and whether it is machine-local, mounted, shared, or versioned. Never store credentials, tokens, raw source exports, or native task history in the portable package.
 
 Changing configuration does not automatically update a live scheduler. If an existing automation prompt embeds old source scope or policy, propose a separate automation update and obtain authorization before applying it.

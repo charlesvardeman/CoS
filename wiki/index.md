@@ -48,12 +48,33 @@ Begin with read-only retrieval and draft generation. External mutation and seman
 
 Skills contain stable operating instructions and portable contracts. User-specific configuration, watermarks, pending actions, trace evidence, and outcome records remain outside installed skill directories so that skill replacement does not overwrite state or distribute private values.
 
-### COS-P007 — Compose scheduling instead of bundling it
+### COS-P007 — Make recurrence part of the experience, not the portable implementation
 
-**Status:** accepted provisional design
-**Origin:** Loop and package-composition dialogue, 2026-09-02
+**Status:** accepted declared policy
+**Origin:** heartbeat correction dialogue, 2026-09-02
 
-The Chief-of-Staff skill defines recurring-run behavior but does not own scheduling. A Codex profile may supply the separate `loop` skill; another harness may supply an equivalent scheduler.
+A usable Chief of Staff includes one durable task and a recurring heartbeat by default. The portable skill defines the recurring behavior while each harness supplies the scheduler implementation. In Codex, configuration should create one native thread heartbeat with minimal ceremony after explicit approval.
+
+### COS-P008 — Give each raw container its own policy
+
+**Status:** accepted declared policy
+**Origin:** raw-container design dialogue, 2026-09-02
+
+`raw` means source evidence that has not been promoted into asserted semantic knowledge. It does not impose one location, format, Git rule, search surface, retention period, or disclosure posture. Readwise Markdown, paper manifests, and CoS trajectories may all be raw while following different declared container policies.
+
+### COS-P009 — Begin learning with observable episode receipts
+
+**Status:** accepted declared policy
+**Origin:** minimum viable learning dialogue, 2026-09-02
+
+Do not delay real use until a full harness exporter or software-style evaluation suite exists. A configured operational task should append privacy-minimized, ordered receipts of its observable episodes. Native harness traces may later enrich capture fidelity without changing the learning boundary.
+
+### COS-P010 — The wiki adapter learns generalities only
+
+**Status:** accepted declared policy
+**Origin:** wiki-memory adapter dialogue, 2026-09-02
+
+The separate wiki-memory adapter generalizes how the Chief of Staff should retrieve, verify, prioritize, route, communicate, and seek authorization. Specific people, projects, messages, literature, and current facts remain in the vault or their source systems. The operational task cannot consult the evolution wiki directly.
 
 ## Open Questions
 
@@ -62,6 +83,7 @@ The Chief-of-Staff skill defines recurring-run behavior but does not own schedul
 - Which attention and omission metrics best predict usefulness in ordinary work?
 - Which aspects of a learned workflow transfer between Codex and other harnesses?
 - Should a reusable installation ship a read-only base evolution wiki or keep every evolving wiki external?
+- Which durable harness signals should identify dedicated Chief-of-Staff tasks and CoS episodes inside mixed-purpose tasks?
 
 ## Supporting Records
 

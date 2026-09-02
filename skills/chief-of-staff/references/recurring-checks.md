@@ -6,7 +6,9 @@ Read this reference when Chief of Staff is invoked by a scheduler or when the us
 
 The scheduler decides when to invoke a run. The Chief-of-Staff skill decides what to inspect and whether anything deserves attention.
 
-Do not assume Codex heartbeat semantics in the portable procedure. In Codex, an installation profile may supply the separate `loop` skill or native automation capability. Other clients may supply a different scheduler.
+Do not encode Codex heartbeat syntax in the portable procedure. In Codex, use a thread-local native heartbeat with the same minimal behavior as the installed `loop` skill. Other clients may supply a different scheduler.
+
+Recurring operation is part of the default Chief-of-Staff experience. During first configuration, recommend one heartbeat attached to the durable Chief-of-Staff task. A 30-minute cadence is the initial Codex default when the user has not expressed another preference; adjust it when source latency, cost, quiet hours, or noise clearly justify a different interval.
 
 ## Check-In Contract
 
@@ -34,6 +36,19 @@ Do not encode these user-specific values in this reference or in `SKILL.md`.
 
 ## Creation and Mutation
 
-Discussing or drafting a check-in does not authorize its creation. Create, update, pause, resume, or delete an automation only when the user explicitly requests that action and the harness provides an appropriate scheduling capability.
+Discussing or drafting a check-in does not authorize its creation. During setup, present the proposed scope, cadence, and quiet behavior and obtain explicit approval before creating it. Once activated, ordinary scheduled invocations do not require repeated approval; expanding source scope or enabling mutating actions does.
 
 Prefer updating the one existing matching Chief-of-Staff schedule over creating a duplicate. The deployment system must prevent two hosts from scanning the same sources concurrently.
+
+## Codex Heartbeat Profile
+
+When configuration is approved in Codex:
+
+- create a native heartbeat attached to the current durable task; do not create a detached cron task or a second Chief-of-Staff task;
+- use a short name such as `Chief of Staff check-in`;
+- put the approved sources and operational behavior in a self-contained prompt, while keeping cadence and task targeting in the automation fields;
+- tell the heartbeat to retrieve intelligently, prioritize consequential unanswered or changing items, research enough context to prepare useful drafts, never send them without approval, stay quiet when nothing material changed, and append the configured trajectory receipt;
+- persist the returned automation identifier in operational configuration;
+- keep the task durable after each run rather than treating the recurrence as a temporary loop with a completion rename.
+
+Do not expose raw scheduling syntax to the user. If the native automation capability is unavailable, report the capability gap instead of simulating recurrence.
